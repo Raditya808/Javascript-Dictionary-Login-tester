@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>/Sign-up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main {
+            background: #fff;
+            border-radius: 12px;
+            padding: 48px 40px;
+            max-width: 380px;
+            width: 100%;
+            border: 1px solid #e8e8e8;
+            animation: fadeUp 0.4s ease both;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-bottom: 28px;
+            letter-spacing: -0.4px;
+        }
+
+        .main-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        #nm, #gm, #pw {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 8px;
+            border: 1px solid #e2e2e2;
+            font-size: 14px;
+            font-family: inherit;
+            color: #0a0a0a;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #nm:focus, #gm:focus, #pw:focus {
+            border-color: #0a0a0a;
+            box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.06);
+        }
+
+        #nm::placeholder, #gm::placeholder, #pw::placeholder {
+            color: #bbb;
+        }
+
+        button[type="button"] {
+            width: 100%;
+            padding: 11px 20px;
+            margin-top: 4px;
+            border-radius: 8px;
+            border: none;
+            background: #0a0a0a;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        button[type="button"]:hover {
+            background: #222;
+        }
+
+        button[type="button"]:active {
+            transform: scale(0.98);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .main-navigation {
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .main-navigation p {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .main-navigation button {
+            width: 100%;
+            padding: 11px 20px;
+            margin-top: 8px;
+            border-radius: 8px;
+            border: 1px solid #e2e2e2;
+            background: #fff;
+            color: #0a0a0a;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+
+        .main-navigation button:hover {
+            background: #f5f5f5;
+        }
+
+        .main-navigation button:active {
+            transform: scale(0.98);
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            font-size: 13px;
+            color: #888;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .back-btn:hover {
+            color: #0a0a0a;
+        }
+    </style>
+  </head>
+  <body>
+    <button>
+      <a href="{{url_for('home')}}" class="back-btn">Kembali</a>
+    </button>
+
+    <div class="main">
+      <h1>Sign-Up First</h1>
+      <div class='main-content'>
+        <form>
+          <input type="text" id="nm" placeholder="Masukan Nama"><br>
+          <input type="text" id="gm" placeholder="Masukan Gmail"><br>
+          <input type="password" id="pw" placeholder="Masukan Password"><br>
+          <button type="button" onclick="sign_up()">Sign-In</button>
+        </form>
+        <br>
+        <div class="main-navigation">
+          <p>Sudah Memiliki Akun? <a href="{{url_for('log')}}"><br><button>Login</button></a></p>
+        </div>
+         <script src="{{url_for('static',filename="js/script.js")}}"></script>
+      </div>
+    </div>
+  </body>
+</html>
