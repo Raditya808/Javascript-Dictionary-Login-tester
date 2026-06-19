@@ -1,5 +1,5 @@
 // html log make tipe data object melalui .value syntax untuk mengambil data 
-// menggunakan button onClick
+//menggunakan button onClick
 
 
 // dictionary list 
@@ -57,17 +57,48 @@ let user_password = document.getElementById('form-password')
 function formlog(){
 
   
+  // the condition if gmail and password is null
   if (user_gmail.value ==='' && user_password.value ===''){
     alert('Gmail / Password Tidak Boleh Kosong')
-    
+    return 
   }
+
+
+
+  // the condition if gmail null 
+  if (user_gmail.value ===''){
+    alert('Gmail Tidak Boleh Kosong')
+    return
+  } 
+
+
+  // the condition if password null
+  if (user_password.value ===''){
+      alert('Password Tidak Boleh Kosong')
+    return
+  }
+  
+
+
 
 
   // dibungkus menggunakan for of didalam list dictionary 
   for (let i of data){
     if(user_gmail.value === i.usergmail && user_password.value === i.userpassword){
-      window.location.href = `/dashboard` // dipanggil lewat route dari / flask  
-      return
+      //window.location.href = `/dashboard` // dipanggil lewat route dari / flask  
+      //return
+      if(i){
+        // make sessionStorage.setItem for DOMContentLoaded form below
+        // and take loop i from nama in object from data 
+        with(i){
+        sessionStorage.setItem('namauser',i.nama)
+        
+
+        // go to dashboard route using python flask
+        window.location.href = '/dashboard'
+        return
+        }
+      }
     }    
     
   }
@@ -75,6 +106,52 @@ function formlog(){
   alert('Gmail/Password SALAH')
 
 }
+
+
+
+
+
+// DOM for formlog() 
+// for take sessionStorage from formlog() and using sessionStorage.getitem
+// using document.addEventListener and DOMContentLoaded and anonymouse function
+document.addEventListener('DOMContentLoaded',function(){
+
+  // take the id from result/success_form.html
+  const html_id = document.getElementById('username_id')
+
+  // take the sessionStorage.setItem from sessionStorage formlog() 
+  const sessionname = sessionStorage.getItem('namauser')
+
+  // use if condition using and (&&) and take the sessionname
+  if(html_id && sessionname){
+    
+  // make it textContent so its show up from html 
+    // and take the sessionname cause sessionname take the object from list + objects [{}]
+    // using inner html to make html tag
+   html_id.innerHTML = `
+   
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Welcome</title>
+      <link href="css/style.css" rel="stylesheet">
+    </head>
+  <body>
+    <div class="card">
+      <h3>${sessionname}</h3> 
+    </div>
+  </body>
+</html>
+
+  ` 
+  }
+   
+
+})
+
+
 
 
 
@@ -97,6 +174,7 @@ function sign_up(){
 
     if(name.value ==='' && gmail.value ==='' && password.value ===''){
       alert('Kolom Ini Tidak Boleh Kosong!') 
+      return 
     }else{
 
     // new sample data dic for signup elements
@@ -104,12 +182,28 @@ function sign_up(){
       nama:name.value,
       usergmail:gmail.value,
       userpassword:password.value
-    }
+    } 
 
 
-
-    data_sec.push(newdicuser)
+    // sucks if statement
+    /*if (name.value ==='' && gmail.value){
+      alert('Nama Tidak Boleh Kosong')
+      return 
+    }else if (gmail.value ===''){
+      alert('Gmail Tidak Boleh Kosong')
+      return 
+    }else if (password.value ===''){
+      alert('Password Tidak Boleh Kosong')
+      return 
+    } else if(name.value ===''&& gmail.value===''){
+      alert('Nama / Gmail Tidak Boleh Kosong')
+      return   
+    }*/
     
+    // nested list
+    //data_sec.push(newdicuser)
+
+    console.log(j.nama) 
     alert('Pendaftaran Berhasil!')
     window.location.href = '/dashboard' // dipanggil lewat route menggunakan / dari flask
   }
@@ -127,6 +221,7 @@ console.log(data_sec)
 
 
 
+// DOM for signup()
 
 
 
