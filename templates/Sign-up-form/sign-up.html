@@ -1,178 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>/Sign-up</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #fafafa;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+html {
+    -webkit-text-size-adjust: 100%;
+}
 
-        .main {
-            background: #fff;
-            border-radius: 12px;
-            padding: 48px 40px;
-            max-width: 380px;
-            width: 100%;
-            border: 1px solid #e8e8e8;
-            animation: fadeUp 0.4s ease both;
-        }
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #fafafa;
+    min-height: 100vh;
+    min-height: 100dvh;           /* tinggi layar HP yang akurat (bar browser diperhitungkan) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(16px, 4vw, 32px);
+    padding-top: 64px;            /* ruang untuk tombol Kembali */
+}
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(16px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+/* ====== TOMBOL KEMBALI ====== */
+.back-btn {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    padding: 10px 12px;           /* area sentuh min. ~44px */
+    font-size: 14px;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.back-btn:hover {
+    color: #0a0a0a;
+}
 
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            color: #0a0a0a;
-            margin-bottom: 28px;
-            letter-spacing: -0.4px;
-        }
+/* ====== KARTU SIGN-UP ====== */
+.main {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    width: 100%;
+    max-width: 400px;
+    padding: clamp(24px, 6vw, 44px) clamp(20px, 6vw, 40px);
+    animation: fadeUp 0.4s ease both;
+}
 
-        .main-content form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
 
-        #nm, #gm, #pw {
-            width: 100%;
-            padding: 11px 14px;
-            border-radius: 8px;
-            border: 1px solid #e2e2e2;
-            font-size: 14px;
-            font-family: inherit;
-            color: #0a0a0a;
-            background: #fff;
-            outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
+@media (prefers-reduced-motion: reduce) {
+    .main { animation: none; }
+}
 
-        #nm:focus, #gm:focus, #pw:focus {
-            border-color: #0a0a0a;
-            box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.06);
-        }
+h1 {
+    font-size: clamp(19px, 5vw, 22px);
+    font-weight: 700;
+    color: #0a0a0a;
+    margin-bottom: clamp(18px, 5vw, 28px);
+    letter-spacing: -0.4px;
+}
 
-        #nm::placeholder, #gm::placeholder, #pw::placeholder {
-            color: #bbb;
-        }
+/* ====== FORM ====== */
+.main-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
-        button[type="button"] {
-            width: 100%;
-            padding: 11px 20px;
-            margin-top: 4px;
-            border-radius: 8px;
-            border: none;
-            background: #0a0a0a;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: inherit;
-            cursor: pointer;
-            transition: background 0.15s ease, transform 0.1s ease;
-        }
+#nm,
+#gm,
+#pw {
+    width: 100%;
+    height: 48px;
+    padding: 0 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e2e2;
+    font-size: 16px;              /* 16px supaya iOS Safari tidak zoom otomatis */
+    font-family: inherit;
+    color: #0a0a0a;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#nm:focus,
+#gm:focus,
+#pw:focus {
+    border-color: #0a0a0a;
+    box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.06);
+}
+#nm::placeholder,
+#gm::placeholder,
+#pw::placeholder {
+    color: #aaa;
+}
 
-        button[type="button"]:hover {
-            background: #222;
-        }
+/* ====== TOMBOL ====== */
+.btn-submit,
+.btn-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.1s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+.btn-submit {
+    margin-top: 4px;
+    border: none;
+    background: #0a0a0a;
+    color: #fff;
+}
+.btn-submit:hover { background: #222; }
 
-        button[type="button"]:active {
-            transform: scale(0.98);
-        }
+.btn-login {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: #0a0a0a;
+}
+.btn-login:hover { background: #f5f5f5; }
 
-        a {
-            text-decoration: none;
-        }
+.btn-submit:active,
+.btn-login:active {
+    transform: scale(0.98);
+}
 
-        .main-navigation {
-            margin-top: 4px;
-            text-align: center;
-        }
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #0a0a0a;
+    outline-offset: 2px;
+}
 
-        .main-navigation p {
-            font-size: 13px;
-            color: #888;
-            line-height: 1.6;
-        }
+/* ====== NAVIGASI LOGIN ====== */
+.main-navigation {
+    margin-top: 20px;
+    text-align: center;
+}
+.main-navigation p {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
 
-        .main-navigation button {
-            width: 100%;
-            padding: 11px 20px;
-            margin-top: 8px;
-            border-radius: 8px;
-            border: 1px solid #e2e2e2;
-            background: #fff;
-            color: #0a0a0a;
-            font-size: 14px;
-            font-weight: 500;
-            font-family: inherit;
-            cursor: pointer;
-            transition: background 0.15s ease, transform 0.1s ease;
-        }
+/* ====== HP KECIL ====== */
+@media (max-width: 480px) {
+    body {
+        align-items: flex-start;  /* kartu mulai dari atas, tidak melayang di tengah saat keyboard muncul */
+        padding-top: 64px;
+    }
+    .main {
+        border-radius: 10px;
+    }
+}
 
-        .main-navigation button:hover {
-            background: #f5f5f5;
-        }
-
-        .main-navigation button:active {
-            transform: scale(0.98);
-        }
-
-        .back-btn {
-            position: fixed;
-            top: 24px;
-            left: 24px;
-            font-size: 13px;
-            color: #888;
-            text-decoration: none;
-            transition: color 0.15s ease;
-        }
-
-        .back-btn:hover {
-            color: #0a0a0a;
-        }
+/* ====== HP LANDSCAPE (layar pendek) ====== */
+@media (max-height: 560px) {
+    body {
+        align-items: flex-start;
+        padding-top: 56px;
+    }
+}
     </style>
   </head>
   <body>
-    <button>
-      <a href="{{url_for('home')}}" class="back-btn">Kembali</a>
-    </button>
+
+    <a href="{{ url_for('home') }}" class="back-btn">Kembali</a>
 
     <div class="main">
       <h1>Sign-Up First</h1>
-      <div class='main-content'>
+      <div class="main-content">
         <form>
-          <input type="text" id="nm" placeholder="Masukan Nama"><br>
-          <input type="text" id="gm" placeholder="Masukan Gmail"><br>
-          <input type="password" id="pw" placeholder="Masukan Password"><br>
-          <button type="button" onclick="sign_up()">Sign-In</button>
+          <input type="text" id="nm" placeholder="Masukan Nama" autocomplete="name" required>
+          <input type="text" id="gm" placeholder="Masukan Gmail" inputmode="email" autocomplete="email" required>
+          <input type="password" id="pw" placeholder="Masukan Password" autocomplete="new-password" required>
+          <button type="button" class="btn-submit" onclick="sign_up()">Sign-In</button>
         </form>
-        <br>
+
         <div class="main-navigation">
-          <p>Sudah Memiliki Akun? <a href="{{url_for('log')}}"><br><button>Login</button></a></p>
+          <p>Sudah memiliki akun?</p>
+          <a href="{{ url_for('log') }}" class="btn-login">Login</a>
         </div>
-         <script src="{{url_for('static',filename="js/script.js")}}"></script>
+
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
       </div>
     </div>
+
   </body>
 </html>

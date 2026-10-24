@@ -1,62 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>/login</title>
     <style>
-        * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: #fafafa;
     min-height: 100vh;
+    min-height: 100dvh;           /* tinggi layar HP yang akurat (bar browser diperhitungkan) */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: clamp(16px, 4vw, 32px);
+    padding-top: 64px;            /* ruang untuk tombol Kembali */
 }
+
+/* ====== TOMBOL KEMBALI ====== */
+.back-btn {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    padding: 10px 12px;           /* area sentuh min. ~44px */
+    font-size: 14px;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.back-btn:hover {
+    color: #0a0a0a;
+}
+
+/* ====== KARTU LOGIN ====== */
 .main {
     background: #fff;
     border-radius: 12px;
-    padding: 48px 40px;
-    max-width: 380px;
-    width: 100%;
     border: 1px solid #e8e8e8;
+    width: 100%;
+    max-width: 400px;
+    padding: clamp(24px, 6vw, 44px) clamp(20px, 6vw, 40px);
     animation: fadeUp 0.4s ease both;
 }
+
 @keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    .main { animation: none; }
+}
+
 h1 {
-    font-size: 22px;
+    font-size: clamp(19px, 5vw, 22px);
     font-weight: 700;
     color: #0a0a0a;
-    margin-bottom: 28px;
+    margin-bottom: clamp(18px, 5vw, 28px);
     letter-spacing: -0.4px;
 }
+
+/* ====== FORM ====== */
 .main-content form {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+
 #form-gmail,
 #form-password {
     width: 100%;
-    padding: 11px 14px;
+    height: 48px;
+    padding: 0 14px;
     border-radius: 8px;
     border: 1px solid #e2e2e2;
-    font-size: 16px; /* 16px agar tidak zoom otomatis di iOS Safari */
+    font-size: 16px;              /* 16px supaya iOS Safari tidak zoom otomatis */
     font-family: inherit;
     color: #0a0a0a;
     background: #fff;
@@ -68,160 +96,107 @@ h1 {
     border-color: #0a0a0a;
     box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.06);
 }
-#form-input::placeholder,
+#form-gmail::placeholder,
 #form-password::placeholder {
-    color: #bbb;
+    color: #aaa;
 }
-button[type="button"] {
+
+/* ====== TOMBOL ====== */
+.btn-login,
+.btn-signup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 12px 20px;
-    margin-top: 4px;
+    height: 48px;
     border-radius: 8px;
-    border: none;
-    background: #0a0a0a;
-    color: #fff;
     font-size: 15px;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
+    text-decoration: none;
     transition: background 0.15s ease, transform 0.1s ease;
+    -webkit-tap-highlight-color: transparent;
 }
-button[type="button"]:hover {
-    background: #222;
+.btn-login {
+    margin-top: 4px;
+    border: none;
+    background: #0a0a0a;
+    color: #fff;
 }
-button[type="button"]:active {
+.btn-login:hover { background: #222; }
+
+.btn-signup {
+    border: 1px solid #e2e2e2;
+    background: #fff;
+    color: #0a0a0a;
+}
+.btn-signup:hover { background: #f5f5f5; }
+
+.btn-login:active,
+.btn-signup:active {
     transform: scale(0.98);
 }
-a {
-    text-decoration: none;
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid #0a0a0a;
+    outline-offset: 2px;
 }
+
+/* ====== NAVIGASI SIGN-UP ====== */
 .main-navigation {
-    margin-top: 4px;
+    margin-top: 20px;
     text-align: center;
 }
 .main-navigation p {
     font-size: 13px;
     color: #888;
     line-height: 1.6;
-}
-.main-navigation button {
-    width: 100%;
-    padding: 12px 20px;
-    margin-top: 8px;
-    border-radius: 8px;
-    border: 1px solid #e2e2e2;
-    background: #fff;
-    color: #0a0a0a;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: inherit;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
-}
-.main-navigation button:hover {
-    background: #f5f5f5;
-}
-.main-navigation button:active {
-    transform: scale(0.98);
-}
-.back-button-corner {
-    all: unset;
-}
-.back-btn {
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    font-size: 13px;
-    color: #888;
-    text-decoration: none;
-    transition: color 0.15s ease;
-    padding: 6px 4px; /* area sentuh lebih besar di HP */
-}
-.back-btn:hover {
-    color: #0a0a0a;
+    margin-bottom: 8px;
 }
 
-/* ====== RESPONSIVE: TABLET & HP ====== */
+/* ====== HP KECIL ====== */
 @media (max-width: 480px) {
     body {
-        padding: 0;
-        align-items: stretch;
-        justify-content: flex-start;
+        align-items: flex-start;  /* kartu mulai dari atas, tidak melayang di tengah saat keyboard muncul */
+        padding-top: 64px;
     }
     .main {
-        padding: 72px 28px 40px;
-        border-radius: 0;
-        max-width: 100%;
-        width: 100%;
-        min-height: 100vh;
-        border: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    h1 {
-        font-size: 28px;
-        margin-bottom: 32px;
-        text-align: center;
-    }
-    .main-content form {
-        gap: 16px;
-    }
-    #form-gmail,
-    #form-password {
-        padding: 16px 16px;
-        font-size: 17px;
         border-radius: 10px;
-    }
-    button[type="button"],
-    .main-navigation button {
-        padding: 16px 20px;
-        font-size: 16px;
-        border-radius: 10px;
-        margin-top: 8px;
-    }
-    .main-navigation p {
-        font-size: 15px;
-        margin-top: 8px;
-    }
-    .back-btn {
-        top: 20px;
-        left: 20px;
-        font-size: 15px;
-        padding: 8px 10px;
     }
 }
 
-/* Layar sangat kecil (HP lama / lipat) */
-@media (max-width: 320px) {
-    .main {
-        padding: 64px 20px 32px;
-    }
-    h1 {
-        font-size: 24px;
+/* ====== HP LANDSCAPE (layar pendek) ====== */
+@media (max-height: 500px) {
+    body {
+        align-items: flex-start;
+        padding-top: 56px;
     }
 }
-</style>
+    </style>
   </head>
   <body>
-    
-    <button class="back-button-corner">
-      <a href="{{url_for('home')}}" class="back-btn">Kembali</a>
-    </button>
-     <div class="main">
-       <h1>Login First</h1>
-       <div class="main-content">
-          <form>
-            <input type="text" id='form-gmail' placeholder="Gmail" required><br> 
-              <input type="password" id='form-password' placeholder="Password" required><br>
-              <button type="button" onclick="formlog()">Login</button> 
-          </form>
-              <br>
-          <div class="main-navigation">
-            <p>Tidak Punya Akun? <a href="{{url_for('sign')}}"><br><button>Sign-Up</button></a></p>
-          </div>
-          <script src='{{url_for('static',filename="js/script.js")}}'></script>
-       </div>
-     </div>  
+
+    <a href="{{ url_for('home') }}" class="back-btn">Kembali</a>
+
+    <div class="main">
+      <h1>Login First</h1>
+      <div class="main-content">
+        <form>
+          <input type="text" id="form-gmail" placeholder="Gmail" inputmode="email" autocomplete="email" required>
+          <input type="password" id="form-password" placeholder="Password" autocomplete="current-password" required>
+          <button type="button" class="btn-login" onclick="formlog()">Login</button>
+        </form>
+
+        <div class="main-navigation">
+          <p>Tidak punya akun?</p>
+          <a href="{{ url_for('sign') }}" class="btn-signup">Sign-Up</a>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+      </div>
+    </div>
+
   </body>
 </html>
